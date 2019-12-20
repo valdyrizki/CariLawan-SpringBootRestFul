@@ -18,12 +18,12 @@ public class SportController {
     private SportRepository sportRepository;
 
     @GetMapping("/")
-    public List<Sport> getAllPlayer() {
+    public List<Sport> getAllSport() {
         return sportRepository.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Sport> getSportById(@PathVariable(value = "id") Long sportId)
+    public ResponseEntity<Sport> getSportById(@PathVariable(value = "id") String sportId)
             throws MyResourceNotFoundException {
         Sport sport = sportRepository
                 .findById(sportId)
@@ -39,7 +39,7 @@ public class SportController {
     //EDIT PROFILE
     @PutMapping("/{id}")
     public ResponseEntity<Sport> updateSport(
-            @PathVariable(value = "id") Long sportId, @Valid @RequestBody Sport sportDetails)
+            @PathVariable(value = "id") String sportId, @Valid @RequestBody Sport sportDetails)
             throws MyResourceNotFoundException {
         Sport sport = sportRepository
                 .findById(sportId)
@@ -55,7 +55,7 @@ public class SportController {
     //DELETE SPORT BY ID
     @DeleteMapping("/{id}")
     public String deleteSport(
-            @PathVariable(value = "id") Long sportId)
+            @PathVariable(value = "id") String sportId)
             throws MyResourceNotFoundException {
         Sport sport = sportRepository
                 .findById(sportId)

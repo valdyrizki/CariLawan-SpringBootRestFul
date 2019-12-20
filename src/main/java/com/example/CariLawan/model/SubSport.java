@@ -10,30 +10,31 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
 import java.util.Date;
 
-@Getter @Setter
+@Setter
+@Getter
 @Entity
-@Table(name = "mst_team")
+@Table(name = "mst_subsport")
 @EntityListeners(AuditingEntityListener.class)
-public class Team implements Serializable {
+public class SubSport {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String team_id;
+    private String subSport_id;
 
-    @Column(name = "teamName", nullable = false)
+    @Column(name = "subSportName", nullable = false)
     @Size(max = 20)
     @NotNull
-    private String teamName;
+    private String sportName;
 
-    @Column(name = "teamSts", nullable = false)
+    @Column(name = "minPlayer", nullable = false)
     @NotNull
-    private int teamSts;
+    private int minPlayer;
 
-    @Column(name = "level")
-    private int level;
+    @Column(name = "maxPlayer", nullable = false)
+    @NotNull
+    private int maxPlayer;
 
     @Column(name = "createdAt", nullable = false)
     @CreatedDate

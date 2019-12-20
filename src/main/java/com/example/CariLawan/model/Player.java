@@ -2,6 +2,7 @@ package com.example.CariLawan.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -13,7 +14,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Setter @Getter
 @Entity
@@ -21,8 +21,9 @@ import java.util.Set;
 @EntityListeners(AuditingEntityListener.class)
 public class Player implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    private String player_id;
 
     @Column(name = "playerName", nullable = false)
     @Size(max = 30)
@@ -39,24 +40,12 @@ public class Player implements Serializable {
     }
 
     @Enumerated(EnumType.STRING)
-    @Size(max = 1)
+    @Size(max = 2)
     @NotNull
     private Gender gender;
 
     @Temporal(TemporalType.DATE)
     private Date birthDate;
-
-    @Column(name = "city_id", nullable = false)
-    private long city_id;
-
-    @Column(name = "prov_id", nullable = false)
-    private long prov_id;
-
-    @Column(name = "team_id")
-    private long team_id;
-
-    @Column(name = "sport_id", nullable = false, updatable = false, insertable = false)
-    private long sport_id;
 
     @Column(name = "phone", nullable = false)
     @Size(max = 16)
@@ -73,8 +62,11 @@ public class Player implements Serializable {
     @LastModifiedDate
     private Date updatedAt;
 
-    @ManyToMany
-    @JoinColumn(name="team_id", nullable=false)
-    private Team team;
+//    @OneToMany(
+//            cascade = CascadeType.ALL,
+//            orphanRemoval = true,
+//            mappedBy = "player_id"
+//    )
+//    private List<CfgSport> cfgSports = new ArrayList<>();
 
 }

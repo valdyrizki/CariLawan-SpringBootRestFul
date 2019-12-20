@@ -2,7 +2,6 @@ package com.example.CariLawan.controller;
 
 import com.example.CariLawan.exception.MyResourceNotFoundException;
 import com.example.CariLawan.model.Player;
-import com.example.CariLawan.model.Sport;
 import com.example.CariLawan.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +28,7 @@ public class PlayerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Player> getPlayerById(@PathVariable(value = "id") Long playerid)
+    public ResponseEntity<Player> getPlayerById(@PathVariable(value = "id") String playerid)
             throws MyResourceNotFoundException {
         Player player = playerRepository
                         .findById(playerid)
@@ -45,7 +44,7 @@ public class PlayerController {
     //EDIT PROFILE
     @PutMapping("/{id}")
     public ResponseEntity<Player> updatePlayer(
-            @PathVariable(value = "id") Long playerid, @Valid @RequestBody Player playerDetails)
+            @PathVariable(value = "id") String playerid, @Valid @RequestBody Player playerDetails)
             throws MyResourceNotFoundException {
         Player player = playerRepository
                         .findById(playerid)
@@ -63,7 +62,7 @@ public class PlayerController {
     //DELETE PLAYER
     @PutMapping("/status/{id}")
     public ResponseEntity<Player> deletePlayer(
-            @PathVariable(value = "id") Long playerid)
+            @PathVariable(value = "id") String playerid)
             throws MyResourceNotFoundException {
         Player player = playerRepository
                 .findById(playerid)

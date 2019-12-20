@@ -1,9 +1,7 @@
 package com.example.CariLawan.controller;
 
 import com.example.CariLawan.exception.MyResourceNotFoundException;
-import com.example.CariLawan.model.Sport;
 import com.example.CariLawan.model.Team;
-import com.example.CariLawan.repository.SportRepository;
 import com.example.CariLawan.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +28,7 @@ public class TeamController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Team> getTeamById(@PathVariable(value = "id") Long teamId)
+    public ResponseEntity<Team> getTeamById(@PathVariable(value = "id") String teamId)
             throws MyResourceNotFoundException {
         Team team = teamRepository
                 .findById(teamId)
@@ -46,7 +44,7 @@ public class TeamController {
     //EDIT TEAM
     @PutMapping("/{id}")
     public ResponseEntity<Team> updateTeam(
-            @PathVariable(value = "id") Long teamId, @Valid @RequestBody Team teamDetails)
+            @PathVariable(value = "id") String teamId, @Valid @RequestBody Team teamDetails)
             throws MyResourceNotFoundException {
         Team team = teamRepository
                 .findById(teamId)
@@ -61,7 +59,7 @@ public class TeamController {
     //DELETE TEAM BY ID
     @PutMapping("/status/{id}")
     public ResponseEntity<Team> deleteTeam(
-            @PathVariable(value = "id") Long teamId)
+            @PathVariable(value = "id") String teamId)
             throws MyResourceNotFoundException {
         Team team = teamRepository
                 .findById(teamId)
