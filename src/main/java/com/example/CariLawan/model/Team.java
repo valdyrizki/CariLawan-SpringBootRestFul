@@ -35,6 +35,9 @@ public class Team implements Serializable {
     @Column(name = "level")
     private int level;
 
+    @Column(name = "team_xp")
+    private int team_xp;
+
     @Column(name = "createdAt", nullable = false)
     @CreatedDate
     private Date createdAt;

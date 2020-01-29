@@ -45,8 +45,6 @@ public class SportController {
                 .findById(sportId)
                 .orElseThrow(() -> new MyResourceNotFoundException("Sport ID "+sportId+" not found."));
         sport.setSportName(sportDetails.getSportName());
-        sport.setMinPlayer(sportDetails.getMinPlayer());
-        sport.setMaxPlayer(sportDetails.getMaxPlayer());
         sport.setUpdatedAt(new Date());
         final Sport updatedSport = sportRepository.save(sport);
         return ResponseEntity.ok(updatedSport);

@@ -3,6 +3,7 @@ package com.example.CariLawan.model;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -14,6 +15,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Setter @Getter
 @Entity
@@ -23,7 +25,7 @@ public class Player implements Serializable {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String player_id;
+    private UUID player_id;
 
     @Column(name = "playerName", nullable = false)
     @Size(max = 30)
@@ -35,14 +37,18 @@ public class Player implements Serializable {
     @NotNull
     private String email;
 
-    public enum Gender {
-        L,P
-    }
+//    public enum Gender {
+//        L,P
+//    }
+//
+//    @Enumerated(EnumType.STRING)
+//    @Range(min = 0,max = 2)
+//    private Gender gender;
 
-    @Enumerated(EnumType.STRING)
-    @Size(max = 2)
+    @Column(name = "gender", nullable = false)
+    @Size(max = 1)
     @NotNull
-    private Gender gender;
+    private String gender;
 
     @Temporal(TemporalType.DATE)
     private Date birthDate;
@@ -51,7 +57,7 @@ public class Player implements Serializable {
     @Size(max = 16)
     private String phone;
 
-    @Column(name = "sts", nullable = false)
+    @Column(name = "sts", columnDefinition = "int default 1")
     private int sts;
 
     @Column(name = "createdAt", nullable = false)

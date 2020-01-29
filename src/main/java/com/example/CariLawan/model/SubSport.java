@@ -28,13 +28,9 @@ public class SubSport {
     @NotNull
     private String sportName;
 
-    @Column(name = "minPlayer", nullable = false)
+    @Column(name = "playerNbr", nullable = false)
     @NotNull
-    private int minPlayer;
-
-    @Column(name = "maxPlayer", nullable = false)
-    @NotNull
-    private int maxPlayer;
+    private int playerNbr;
 
     @Column(name = "createdAt", nullable = false)
     @CreatedDate
